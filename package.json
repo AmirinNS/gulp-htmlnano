@@ -10,7 +10,8 @@
     "lint": "eslint plugin.es6 test.js",
     "pretest": "npm run lint && npm run compile",
     "test": "_mocha --compilers js:babel-core/register --check-leaks test.js",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run compile",
+    "prepare": "npm run compile"
   },
   "keywords": [
     "gulpplugin",
