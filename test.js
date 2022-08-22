@@ -35,7 +35,7 @@ describe('gulp-htmlnano', () => {
 
 
 function init(html, expectedHtml, done, options = {}) {
-    let htmlFile = new File({contents: new Buffer(html)});
+    let htmlFile = new File({contents: new Buffer.from(html)});
     let pluginInstance = gulpHtmlnano(options);
     pluginInstance.write(htmlFile);
     pluginInstance.once('data', file => {

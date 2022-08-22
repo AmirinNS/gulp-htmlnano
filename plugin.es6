@@ -1,10 +1,11 @@
 import { Transform } from 'stream';
 import { PluginError } from 'gulp-util';
 import htmlnano from 'htmlnano';
+import safe from 'htmlnano/lib/presets/safe';
 
 const PLUGIN_NAME = 'gulp-htmlnano';
 
-export default options => {
+export default (options={}, preset=safe, postHtmlOptions={}) => {
     let stream = new Transform({objectMode: true});
 
     stream._transform = (file, encoding, callback) => {
@@ -15,9 +16,9 @@ export default options => {
         }
 
         htmlnano
-            .process(String(file.contents), options)
+            .process(String(file.contents), options, preset, postHtmlOptions)
             .then(result => {
-                file.contents = new Buffer(result.html);
+                file.contents = new Buffer.from(result.html);
                 stream.push(file);
                 callback();
             })
